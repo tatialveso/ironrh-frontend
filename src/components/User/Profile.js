@@ -1,4 +1,4 @@
-import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap"
+import { Button, Card, Col, Container, Nav, Navbar, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 function Profile() {
@@ -15,9 +15,11 @@ function Profile() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+
             <Container className="mt-5">
-                <h1 class="text-muted">Nome do usuário</h1>
-                <Row>
+                <h1>Nome do usuário</h1>
+                <h6 className="fw-bold text-muted">Ativo na empresa desde DD/MM/YYY</h6>
+                <Row className="my-4">
                     <Col>
                         <Button variant="primary">
                             <Link className="nav-link" to="/edit-profile">Editar perfil</Link>
@@ -29,6 +31,62 @@ function Profile() {
                         </Button>
                     </Col>
                 </Row>
+                <Card>
+                    <Card.Header>
+                        <h5 className="fw-bold m-0 py-1">Dados básicos</h5>
+                    </Card.Header>
+                    <Card.Body>
+                        <Row>
+                            <Col>
+                                <Card.Title>Endereço de e-mail</Card.Title>
+                                <Card.Text>
+                                    lorem@ipsum.com
+                                </Card.Text>
+                            </Col>
+                            <Col>
+                                <Card.Title>Telefone</Card.Title>
+                                <Card.Text>
+                                    XXXXX-XXXX
+                                </Card.Text>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+                <Card className="mt-5">
+                    <Card.Header>
+                        <h5 className="fw-bold m-0 py-1">Dados empregatícios</h5>
+                    </Card.Header>
+                    <Card.Body>
+                        <Row>
+                            <Col>
+                                <Card.Title>Data de admissão</Card.Title>
+                                <Card.Text>
+                                    DD/MM/YYYY
+                                </Card.Text>
+                            </Col>
+                            <Col>
+                                <Card.Title>Salário</Card.Title>
+                                <Card.Text>
+                                    R$ XXXX,XX
+                                </Card.Text>
+                            </Col>
+                        </Row>
+                        <Row className="mt-3">
+                            <Col>
+                                <Card.Title>Status</Card.Title>
+                                <Card.Text>
+                                    Lorem ipsum
+                                </Card.Text>
+                            </Col>
+                            <Col>
+                                <Card.Title>Departamento</Card.Title>
+                                <Card.Text>
+                                    Lorem ipsum
+                                </Card.Text>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
             </Container>
         </div>
     )
