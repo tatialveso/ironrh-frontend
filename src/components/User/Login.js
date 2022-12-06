@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Button, Container, Form } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
+import { api } from '../../api/api.js'
+import { AuthContext } from "../../contexts/authContext.js"
 
 function Login() {
     const navigate = useNavigate()
+    // um hook nativo do react
+    const { setLoggedUser } = useContext(AuthContext)
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -16,7 +20,16 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        navigate('/perfil')
+        try {
+            const response = await api.post('/user/login', form)
+
+            setLoggedUser({ ...response.data })
+            localStorage.setItem("loggedUser", JSON.stringify(response.data))
+
+            navigate('/perfil')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

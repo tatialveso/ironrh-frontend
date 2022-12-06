@@ -1,7 +1,11 @@
+import { useContext } from "react"
 import { Button, Card, Col, Container, Nav, Navbar, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../contexts/authContext"
 
 function Profile() {
+    const { loggedUser }  = useContext(AuthContext)
+
     return (
         <div>
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -16,18 +20,18 @@ function Profile() {
                 </Container>
             </Navbar>
 
-            <Container className="mt-5">
+            <Container className="my-5">
                 <h1>Nome do usuário</h1>
                 <h6 className="fw-bold text-muted">Ativo na empresa desde DD/MM/YYY</h6>
                 <Row className="my-4">
                     <Col>
                         <Button variant="primary">
-                            <Link className="nav-link" to="/edit-profile">Editar perfil</Link>
+                            <Link className="nav-link" to="/editar-perfil">Editar perfil</Link>
                         </Button>
                     </Col>
                     <Col>
                         <Button variant="danger">
-                            <Link className="nav-link" to="/delete-profile">Excluir perfil</Link>
+                            <Link className="nav-link" to="/deletar-perfil">Excluir perfil</Link>
                         </Button>
                     </Col>
                 </Row>
@@ -40,7 +44,7 @@ function Profile() {
                             <Col>
                                 <Card.Title>Endereço de e-mail</Card.Title>
                                 <Card.Text>
-                                    lorem@ipsum.com
+                                    { loggedUser.user.email }
                                 </Card.Text>
                             </Col>
                             <Col>
