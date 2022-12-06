@@ -5,6 +5,7 @@ import Register from './components/User/Register';
 import Login from './components/User/Login';
 import Profile from './components/User/Profile';
 import { AuthContextComponent } from './contexts/authContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route path="/" element={ <Home /> } />
           <Route path="/registro" element={ <Register /> } />
           <Route path="/login" element={ <Login /> } />
-          <Route path="/perfil" element={ <Profile /> } />
+          <Route path="/perfil" element={ <ProtectedRoute Component={Profile} /> } />
         </Routes>
       </AuthContextComponent>
     </div>
