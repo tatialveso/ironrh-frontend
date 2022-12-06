@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
+import { api } from "../../api/api"
 
 function Register() {
     const navigate = useNavigate()
@@ -15,19 +16,24 @@ function Register() {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        // criar a requisição para enviar este novo usuário
-            // requisição método POST
-
-        navigate('/login')
+        try {
+            // criar a requisição para enviar este novo usuário
+                // requisição método POST
+            await api.post("/user/register", form)
+    
+            navigate('/login')
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
         <Container style={{ height: '100vh' }} className="d-flex flex-column align-items-center justify-content-center">
             <Form className="w-50" onSubmit={ handleSubmit }>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                     <Form.Label>Nome completo</Form.Label>
                     <Form.Control
                         type="text"
@@ -38,7 +44,7 @@ function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                     <Form.Label>Endereço de e-mail</Form.Label>
                     <Form.Control
                         type="email"
@@ -49,7 +55,7 @@ function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Senha</Form.Label>
                     <Form.Control
                         type="password"
@@ -60,7 +66,7 @@ function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Confirmar senha</Form.Label>
                     <Form.Control
                         type="password"
@@ -75,7 +81,7 @@ function Register() {
                     Cadastrar usuário
                 </Button>
             </Form>
-            <Form.Text>Ainda não possui cadastro? Faça já o
+            <Form.Text>Já possui cadastro? Faça já o
                 <Link
                     className="text-warning fw-bold text-decoration-none"
                     to="/login"
