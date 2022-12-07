@@ -17,7 +17,8 @@ function NavigationBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link className="nav-link" to="/">Página inicial</Link>
+                        <Link className="nav-link" to="/funcionarios">Página inicial</Link>
+                        <Link className="nav-link" to="/funcionarios/adicionar">Adicionar novo funcionário</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
