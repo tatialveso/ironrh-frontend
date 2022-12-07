@@ -11,6 +11,7 @@ import EmployeeList from './components/Employee/EmployeeList'
 import AddEmployee from './components/Employee/AddEmployee'
 import NavigationBar from './components/NavigationBar';
 import { useState } from 'react';
+import EmployeeDetails from './components/Employee/EmployeeDetails';
 
 function App() {
   const [form, setForm] = useState({
@@ -35,6 +36,7 @@ function App() {
           <Route path="/perfil" element={ <ProtectedRoute Component={Profile} /> } />
           <Route path="/funcionarios" element={ <EmployeeList /> } />
           <Route path="/funcionarios/adicionar" element={ <AddEmployee form={form} setForm={setForm} /> } />
+          <Route path="/funcionarios/:id" element={<EmployeeDetails form={form} setForm={setForm} />} />
           <Route path="*" element={ <ErrorPage /> } />
         </Routes>
       </AuthContextComponent>
