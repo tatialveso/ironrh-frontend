@@ -6,7 +6,6 @@ import { AuthContext } from "../../contexts/authContext.js"
 
 function Login() {
     const navigate = useNavigate()
-    // um hook nativo do react
     const { setLoggedUser } = useContext(AuthContext)
     const [form, setForm] = useState({
         email: "",
@@ -26,7 +25,7 @@ function Login() {
             setLoggedUser({ ...response.data })
             localStorage.setItem("loggedUser", JSON.stringify(response.data))
 
-            navigate('/perfil')
+            navigate('/tarefas')
         } catch (error) {
             console.log(error)
         }
