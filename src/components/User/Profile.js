@@ -21,6 +21,7 @@ function Profile() {
             </Navbar>
 
             <Container className="my-5">
+                <img src={ loggedUser.user.profileImg } />
                 <h1>Nome do usuário</h1>
                 <h6 className="fw-bold text-muted">Ativo na empresa desde DD/MM/YYY</h6>
                 <Row className="my-4">

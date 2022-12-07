@@ -5,6 +5,7 @@ import { api } from "../../api/api"
 
 function Register() {
     const navigate = useNavigate()
+    const [img, setImg] = useState("")
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -16,13 +17,34 @@ function Register() {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
+    const handleImage = (e) => {
+        setImg(e.target.files[0])
+    }
+
+    // faz a requisição da imagem (/upload-image) e retornar o path (caminho)
+    const handleUpload = async () => {
+        try {
+            const uploadData = new FormData()
+            uploadData.append("picture", img)
+
+            // subindo a img para o cloudinary
+            const response = await api.post('/upload-image', uploadData)
+
+            // retorna o caminho (path) da imagem dentro do cloudinary
+            return response.data.url
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
+            const imgURL = await handleUpload()
             // criar a requisição para enviar este novo usuário
                 // requisição método POST
-            await api.post("/user/register", form)
+            await api.post("/user/register", { ...form, profileImg: imgURL })
     
             navigate('/login')
         } catch (error) {
@@ -52,6 +74,14 @@ function Register() {
                         name="email"
                         value={ form.email }
                         onChange={ handleChange }
+                    />
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Imagem de perfil</Form.Label>
+                    <Form.Control
+                        type="file"
+                        onChange={ handleImage }
                     />
                 </Form.Group>
 
