@@ -1,17 +1,19 @@
 import './App.css';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { AuthContextComponent } from './contexts/authContext';
 import Home from './pages/Home';
+import ErrorPage from './pages/ErrorPage';
 import Register from './components/User/Register';
 import Login from './components/User/Login';
 import Profile from './components/User/Profile';
-import { AuthContextComponent } from './contexts/authContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import ErrorPage from './pages/ErrorPage';
 import EmployeeList from './components/Employee/EmployeeList'
 import AddEmployee from './components/Employee/AddEmployee'
-import NavigationBar from './components/NavigationBar';
-import { useState } from 'react';
 import EmployeeDetails from './components/Employee/EmployeeDetails';
+import NavigationBar from './components/NavigationBar';
+import TodoList from './components/Todo/TodoList';
+import AddTodo from './components/Todo/AddTodo';
 
 function App() {
   const [form, setForm] = useState({
@@ -37,6 +39,8 @@ function App() {
           <Route path="/funcionarios" element={ <EmployeeList /> } />
           <Route path="/funcionarios/adicionar" element={ <AddEmployee form={form} setForm={setForm} /> } />
           <Route path="/funcionarios/:id" element={<EmployeeDetails form={form} setForm={setForm} />} />
+          <Route path="/tarefas" element={ <TodoList /> } />
+          <Route path="/tarefas/nova-tarefa" element={ <AddTodo /> } />
           <Route path="*" element={ <ErrorPage /> } />
         </Routes>
       </AuthContextComponent>
