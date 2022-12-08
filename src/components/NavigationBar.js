@@ -10,7 +10,8 @@ function NavigationBar() {
 
     if(location.pathname === "/"
         || location.pathname === '/login'
-        || location.pathname === "/registro") {
+        || location.pathname === "/registro"
+        || location.pathname === "/erro") {
             return null
     }
 
@@ -27,7 +28,7 @@ function NavigationBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto w-100 d-flex justify-content-between align-items-center">
                         <div className="d-flex flex-row">
-                            { loggedUser.user.isAdmin &&
+                            { loggedUser?.user?.isAdmin &&
                                 <Link className="nav-link" to="/funcionarios">Visualizar funcionários</Link>
                             }
                             <Link className="nav-link" to="/tarefas">Visualizar tarefas</Link>
@@ -35,7 +36,7 @@ function NavigationBar() {
                         </div>
                         <div className="d-flex flex-row align-items-center">
                             <Link className="nav-link" to="/perfil">
-                                <img style={{width: '35px'}} className="rounded-circle me-2" src={loggedUser.user.profileImg} alt={`Imagem de perfil de ${loggedUser.user.name}`} />
+                                <img style={{width: '35px'}} className="rounded-circle me-2" src={loggedUser?.user.profileImg} alt={`Imagem de perfil de ${loggedUser?.user.name}`} />
                             </Link>
                             <Button variant="danger" onClick={ handleLogout }>Logout</Button>
                         </div>

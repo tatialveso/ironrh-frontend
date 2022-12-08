@@ -16,7 +16,7 @@ function DeleteTodo({ id }) {
         await api.delete(`/todo/delete/${id}`)
         handleClose()
 
-        toast.success('Usuário deletado com sucesso!', {
+        toast.warning('Tarefa deletada com sucesso!', {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,

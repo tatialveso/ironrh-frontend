@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../contexts/authContext.js'
+import { Outlet, useNavigate } from "react-router-dom"
 
 function ProtectedRoute() {
     const { loggedUser } = useContext(AuthContext)
@@ -8,6 +8,8 @@ function ProtectedRoute() {
 
     if (!loggedUser) {
         return navigate("/")
+    } else {
+        return <Outlet />
     }
 }
 

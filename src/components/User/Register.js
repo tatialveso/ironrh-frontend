@@ -39,13 +39,33 @@ function Register() {
 
         try {
             const imgURL = await handleUpload()
-            // criar a requisição para enviar este novo usuário
-                // requisição método POST
             await api.post("/user/register", { ...form, profileImg: imgURL })
     
             navigate('/login')
+
+            toast.success('Cadastro concluído com sucesso!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (error) {
             console.log(error)
+
+            toast.error('Não foi possível fazer o cadastro', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
 

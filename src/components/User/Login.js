@@ -26,8 +26,30 @@ function Login() {
             localStorage.setItem("loggedUser", JSON.stringify(response.data))
 
             navigate('/tarefas')
+
+            toast.success('Login realizado com sucesso', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (error) {
             console.log(error)
+
+            toast.error('Não foi possível fazer o login', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
 
