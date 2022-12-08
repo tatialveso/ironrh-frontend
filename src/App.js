@@ -16,7 +16,13 @@ import TodoList from './components/Todo/TodoList';
 import AddTodo from './components/Todo/AddTodo';
 
 function App() {
-  const [form, setForm] = useState({
+  const [todoForm, setTodoForm] = useState({
+    title: "",
+    description: "",
+    deadline: ""
+  })
+
+  const [userForm, setUserForm] = useState({
     name: "",
     salary: "",
     email: "",
@@ -32,16 +38,16 @@ function App() {
       <AuthContextComponent>
         <NavigationBar />
         <Routes>
-          <Route path="/" element={ <Home /> } />
-          <Route path="/registro" element={ <Register /> } />
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/perfil" element={ <ProtectedRoute Component={Profile} /> } />
-          <Route path="/funcionarios" element={ <EmployeeList /> } />
-          <Route path="/funcionarios/adicionar" element={ <AddEmployee form={form} setForm={setForm} /> } />
-          <Route path="/funcionarios/:id" element={<EmployeeDetails form={form} setForm={setForm} />} />
-          <Route path="/tarefas" element={ <TodoList /> } />
-          <Route path="/tarefas/nova-tarefa" element={ <AddTodo /> } />
-          <Route path="*" element={ <ErrorPage /> } />
+          <Route path="/" element={<Home />} />
+          <Route path="/registro" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/perfil" element={<ProtectedRoute Component={Profile} />} />
+          <Route path="/funcionarios" element={<EmployeeList />} />
+          <Route path="/funcionarios/adicionar" element={<AddEmployee userForm={userForm} setUserForm={setUserForm} />} />
+          <Route path="/funcionarios/:id" element={<EmployeeDetails />} />
+          <Route path="/tarefas" element={<TodoList todoForm={todoForm} setTodoForm={setTodoForm} />} />
+          <Route path="/tarefas/nova-tarefa" element={<AddTodo todoForm={todoForm} setTodoForm={setTodoForm} />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AuthContextComponent>
     </div>
