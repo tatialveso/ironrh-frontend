@@ -1,28 +1,33 @@
 import { useContext } from "react"
-import { Button, Card, Col, Container, Row } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Card, Col, Container, Row } from "react-bootstrap"
 import { AuthContext } from "../../contexts/authContext"
 
 function Profile() {
     const { loggedUser } = useContext(AuthContext)
 
+    const formatDate = (field) => {
+        const newDate = new Date(field)
+        const dd = newDate.getDate() + 1
+        const mm = newDate.getMonth() + 1
+        const yyyy = newDate.getFullYear()
+        
+        return `${dd}/${mm}/${yyyy}`
+    }
+
     return (
-        <Container className="my-5">
-            <img src={loggedUser.user.profileImg} alt="" />
-            <h1>Nome do usuário</h1>
-            <h6 className="fw-bold text-muted">Ativo na empresa desde DD/MM/YYY</h6>
-            <Row className="my-4">
-                <Col>
-                    <Button variant="primary">
-                        <Link className="nav-link" to="/editar-perfil">Editar perfil</Link>
-                    </Button>
-                </Col>
-                <Col>
-                    <Button variant="danger">
-                        <Link className="nav-link" to="/deletar-perfil">Excluir perfil</Link>
-                    </Button>
-                </Col>
-            </Row>
+        <Container>
+            <img className="rounded-circle my-4" src={loggedUser.user.profileImg} alt="" />
+            <h1>{loggedUser.user.name}</h1>
+            {loggedUser.user.active &&
+                <h6 className="fw-bold text-muted mb-4">
+                    {`Ativo na empresa desde ${formatDate(loggedUser.user.admissionDate)}`}
+                </h6>
+            }
+            {!loggedUser.user.active &&
+                <h6 className="fw-bold text-muted mb-4">
+                    {`Inativo na empresa desde ${formatDate(loggedUser.user.resignationDate)}`}
+                </h6>
+            }
             <Card>
                 <Card.Header>
                     <h5 className="fw-bold m-0 py-1">Dados básicos</h5>
@@ -36,15 +41,29 @@ function Profile() {
                             </Card.Text>
                         </Col>
                         <Col>
-                            <Card.Title>Telefone</Card.Title>
+                            <Card.Title>Número de telefone</Card.Title>
                             <Card.Text>
-                                XXXXX-XXXX
+                                {loggedUser.user.phone}
+                            </Card.Text>
+                        </Col>
+                    </Row>
+                    <Row className="mt-3">
+                        <Col>
+                            <Card.Title>Data de aniversário</Card.Title>
+                            <Card.Text>
+                            {formatDate(loggedUser.user.birthDate)}
+                            </Card.Text>
+                        </Col>
+                        <Col>
+                            <Card.Title>Cidade de residência</Card.Title>
+                            <Card.Text>
+                                {loggedUser.user.address.city} - {loggedUser.user.address.state}
                             </Card.Text>
                         </Col>
                     </Row>
                 </Card.Body>
             </Card>
-            <Card className="mt-5">
+            <Card className="my-5">
                 <Card.Header>
                     <h5 className="fw-bold m-0 py-1">Dados empregatícios</h5>
                 </Card.Header>
@@ -53,13 +72,21 @@ function Profile() {
                         <Col>
                             <Card.Title>Data de admissão</Card.Title>
                             <Card.Text>
-                                DD/MM/YYYY
+                                {formatDate(loggedUser.user.admissionDate)}
                             </Card.Text>
                         </Col>
+                        {!loggedUser.user.active &&
+                            <Col>
+                                <Card.Title>Data de desligamento</Card.Title>
+                                <Card.Text>
+                                    {formatDate(loggedUser.user.resignationDate)}
+                                </Card.Text>
+                            </Col>
+                        }
                         <Col>
                             <Card.Title>Salário</Card.Title>
                             <Card.Text>
-                                R$ XXXX,XX
+                                R$ {loggedUser.user.salary}
                             </Card.Text>
                         </Col>
                     </Row>
@@ -67,13 +94,13 @@ function Profile() {
                         <Col>
                             <Card.Title>Status</Card.Title>
                             <Card.Text>
-                                Lorem ipsum
+                                {loggedUser.user.status}
                             </Card.Text>
                         </Col>
                         <Col>
                             <Card.Title>Departamento</Card.Title>
                             <Card.Text>
-                                Lorem ipsum
+                                {loggedUser.user.department}
                             </Card.Text>
                         </Col>
                     </Row>
