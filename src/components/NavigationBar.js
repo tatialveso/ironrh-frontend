@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from '../contexts/authContext'
 
 function NavigationBar() {
     const navigate = useNavigate()
     const location = useLocation()
+    const { loggedUser } = useContext(AuthContext)
 
     if(location.pathname === "/"
         || location.pathname === '/login'
@@ -24,11 +27,19 @@ function NavigationBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto w-100 d-flex justify-content-between align-items-center">
                         <div className="d-flex flex-row">
-                            <Link className="nav-link" to="/tarefas">Página inicial</Link>
+                            <Link className="nav-link" to="/tarefas">Visualizar tarefas</Link>
                             <Link className="nav-link" to="/tarefas/nova-tarefa">Adicionar nova tarefa</Link>
-                            <Link className="nav-link" to="/perfil">Visualizar perfil</Link>
+                            { loggedUser.user.isAdmin &&
+                                <>
+                                    <Link className="nav-link" to="/funcionarios">Visualizar funcionários</Link>
+                                    <Link className="nav-link" to="/funcionarios/adicionar">Adicionar novo funcionário</Link>
+                                </>
+                            }
                         </div>
-                        <div>
+                        <div className="d-flex flex-row align-items-center">
+                            <Link className="nav-link" to="/perfil">
+                                <img style={{width: '35px'}} className="rounded-circle me-2" src={loggedUser.user.profileImg} />
+                            </Link>
                             <Button variant="danger" onClick={ handleLogout }>Logout</Button>
                         </div>
                     </Nav>
