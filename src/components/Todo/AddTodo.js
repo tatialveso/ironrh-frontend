@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { Button, Container, Form } from "react-bootstrap"
+import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { AuthContext } from '../../contexts/authContext'
@@ -60,47 +60,56 @@ function AddTodo({ todoForm, setTodoForm }) {
         <Container>
             <h2 className="my-5">Cadastrar nova tarefa</h2>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Título</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Insira um título da tarefa"
-                        name="title"
-                        value={todoForm.title}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Descrição</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Insira uma explicação da tarefa"
-                        name="description"
-                        value={todoForm.description}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Progresso</Form.Label>
-                    <Form.Select name="progress" onChange={handleChange}>
-                        <option>Selecione uma opção</option>
-                        <option value="Não iniciado">Não iniciado</option>
-                        <option value="Em Progresso">Em Progresso</option>
-                        <option value="Concluído">Concluído</option>
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>Prazo de conclusão</Form.Label>
-                    <Form.Control
-                        type="date"
-                        name="deadline"
-                        value={todoForm.deadline}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Título</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Insira um título da tarefa"
+                                name="title"
+                                value={todoForm.title}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Descrição</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Insira uma explicação da tarefa"
+                                name="description"
+                                value={todoForm.description}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Progresso</Form.Label>
+                            <Form.Select name="progress" onChange={handleChange}>
+                                <option>Selecione uma opção</option>
+                                <option value="Não iniciado">Não iniciado</option>
+                                <option value="Em Progresso">Em Progresso</option>
+                                <option value="Concluído">Concluído</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Prazo de conclusão</Form.Label>
+                            <Form.Control
+                                type="date"
+                                name="deadline"
+                                value={todoForm.deadline}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
                 <Button variant="primary" type="submit">
                     Cadastrar tarefa
