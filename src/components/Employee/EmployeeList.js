@@ -11,7 +11,7 @@ function PeopleList() {
     useEffect(() => {
         try {
             const fetchEmployees = async () => {
-                const response = await api.get("/employees")
+                const response = await api.get("/user")
                 setEmployees(response.data)
                 setIsLoading(false)
             }
@@ -25,7 +25,6 @@ function PeopleList() {
     const renderEmployees = employees
     .filter((employee) => employee.name.toLowerCase().includes(search.toLowerCase()))
     .map((employee) => {
-            console.log(employee)
             return (
                 <tr key={employee._id}>
                     <td>{employee.name}</td>
