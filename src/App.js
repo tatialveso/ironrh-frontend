@@ -19,6 +19,7 @@ function App() {
   const [todoForm, setTodoForm] = useState({
     title: "",
     description: "",
+    progress: "",
     deadline: ""
   })
 

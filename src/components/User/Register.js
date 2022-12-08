@@ -21,16 +21,13 @@ function Register() {
         setImg(e.target.files[0])
     }
 
-    // faz a requisição da imagem (/upload-image) e retornar o path (caminho)
     const handleUpload = async () => {
         try {
             const uploadData = new FormData()
             uploadData.append("picture", img)
 
-            // subindo a img para o cloudinary
             const response = await api.post('/upload-image', uploadData)
 
-            // retorna o caminho (path) da imagem dentro do cloudinary
             return response.data.url
         } catch (error) {
             console.log(error)

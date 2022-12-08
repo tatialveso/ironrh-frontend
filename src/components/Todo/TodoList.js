@@ -40,6 +40,7 @@ function TodoList({ todoForm, setTodoForm }) {
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroup.Item>Prazo: {dd}/{mm}/{yyyy}</ListGroup.Item>
+            <ListGroup.Item>{todo.progress}</ListGroup.Item>
             <ListGroup.Item>
               Responsável:
               <Link className="nav-link d-inline" to={`/funcionarios/${todo.responsable._id}`}> {todo.responsable.name}</Link>

@@ -14,15 +14,16 @@ function AddTodo({ todoForm, setTodoForm }) {
         setTodoForm({
             title: "",
             description: "",
+            progress: "",
             deadline: ""
         })
-    }, [])
-    
+    }, [setTodoForm])
+
     const handleChange = (e) => {
         setTodoForm({ ...todoForm, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
@@ -58,7 +59,7 @@ function AddTodo({ todoForm, setTodoForm }) {
     return (
         <Container>
             <h2 className="my-5">Cadastrar nova tarefa</h2>
-            <Form onSubmit={ handleSubmit }>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label>Título</Form.Label>
                     <Form.Control
@@ -66,7 +67,7 @@ function AddTodo({ todoForm, setTodoForm }) {
                         placeholder="Insira um título da tarefa"
                         name="title"
                         value={todoForm.title}
-                        onChange={ handleChange }
+                        onChange={handleChange}
                     />
                 </Form.Group>
 
@@ -77,8 +78,18 @@ function AddTodo({ todoForm, setTodoForm }) {
                         placeholder="Insira uma explicação da tarefa"
                         name="description"
                         value={todoForm.description}
-                        onChange={ handleChange }
+                        onChange={handleChange}
                     />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Progresso</Form.Label>
+                    <Form.Select name="progress" onChange={handleChange}>
+                        <option>Selecione uma opção</option>
+                        <option value="Não iniciado">Não iniciado</option>
+                        <option value="Em Progresso">Em Progresso</option>
+                        <option value="Concluído">Concluído</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -87,7 +98,7 @@ function AddTodo({ todoForm, setTodoForm }) {
                         type="date"
                         name="deadline"
                         value={todoForm.deadline}
-                        onChange={ handleChange }
+                        onChange={handleChange}
                     />
                 </Form.Group>
 
