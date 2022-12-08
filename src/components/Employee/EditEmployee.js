@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { api } from "../../api/api";
 
-function EditEmployee({ id, form, setForm }) {
+function EditEmployee({ id, userForm, setUserForm }) {
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
 
@@ -14,27 +14,27 @@ function EditEmployee({ id, form, setForm }) {
     
     useEffect(() => {
         const fetchEmployee = async () => {
-            const response = await api.get(`/employees/${id}`)
-            setForm(response.data)
+            const response = await api.get(`/user/${id}`)
+            setUserForm(response.data)
         }
 
         fetchEmployee()
-    }, [id, setForm])
+    }, [id, setUserForm])
     
     const handleChange = (e) => {
         if (e.target.name === "active") {
-            setForm({ ...form, active: e.target.checked })
+            setUserForm({ ...userForm, active: e.target.checked })
             return
         }
 
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setUserForm({ ...userForm, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            await api.put(`employees/edit/${id}`, form)
+            await api.put(`user/edit/${id}`, userForm)
 
             navigate("/funcionarios")
 
@@ -91,7 +91,7 @@ function EditEmployee({ id, form, setForm }) {
                                 type="text"
                                 placeholder="Insira o nome completo do funcionário"
                                 name="name"
-                                value={form.name}
+                                value={userForm.name}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -101,7 +101,7 @@ function EditEmployee({ id, form, setForm }) {
                                 type="text"
                                 placeholder="Insira o número de telefone para contato com DDD"
                                 name="phone"
-                                value={form.phone}
+                                value={userForm.phone}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -111,7 +111,7 @@ function EditEmployee({ id, form, setForm }) {
                                 type="email"
                                 placeholder="Insira o endereço de e-mail válido para contato"
                                 name="email"
-                                value={form.email}
+                                value={userForm.email}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -121,7 +121,7 @@ function EditEmployee({ id, form, setForm }) {
                                 type="number"
                                 placeholder="Insira o valor da remuneração mensal"
                                 name="salary"
-                                value={form.salary}
+                                value={userForm.salary}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -143,7 +143,7 @@ function EditEmployee({ id, form, setForm }) {
                                 type="date"
                                 placeholder="Insira o valor da remuneração mensal"
                                 name="admissionDate"
-                                value={form.admissionDate}
+                                value={userForm.admissionDate}
                                 onChange={handleChange}
                             />
                         </Form.Group>
