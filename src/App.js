@@ -31,7 +31,11 @@ function App() {
     department: "",
     admissionDate: "",
     status: "",
-    active: true
+    active: true,
+    address: {
+      city: "",
+      state: ""
+    }
   })
 
   return (
@@ -42,13 +46,55 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/registro" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/perfil" element={<ProtectedRoute Component={Profile} />} />
-          <Route path="/funcionarios" element={<EmployeeList />} />
-          <Route path="/funcionarios/adicionar" element={<AddEmployee userForm={userForm} setUserForm={setUserForm} />} />
-          <Route path="/funcionarios/:id" element={<EmployeeDetails userForm={userForm} setUserForm={setUserForm} />} />
-          <Route path="/tarefas" element={<TodoList todoForm={todoForm} setTodoForm={setTodoForm} />} />
-          <Route path="/tarefas/nova-tarefa" element={<AddTodo todoForm={todoForm} setTodoForm={setTodoForm} />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route
+            path="/perfil"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/funcionarios"
+            element={
+              <ProtectedRoute>
+                <EmployeeList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/funcionarios/adicionar"
+            element={
+              <ProtectedRoute>
+                <AddEmployee userForm={userForm} setUserForm={setUserForm} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/funcionarios/:id"
+            element={
+              <ProtectedRoute>
+                <EmployeeDetails userForm={userForm} setUserForm={setUserForm} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tarefas"
+            element={
+              <ProtectedRoute>
+                <TodoList todoForm={todoForm} setTodoForm={setTodoForm} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tarefas/nova-tarefa"
+            element={
+              <ProtectedRoute>
+                <AddTodo todoForm={todoForm} setTodoForm={setTodoForm} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={ <ErrorPage /> } />
         </Routes>
       </AuthContextComponent>
     </div>
