@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react"
-import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap"
-import { useNavigate, useParams } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAt, faPhone, faCalendarCheck, faCircleCheck, faBuildingUser, faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
-import { api } from "../../api/api";
+import { Card, Col, Container, Row, Spinner } from "react-bootstrap"
+import { useParams } from "react-router-dom"
+import { api } from "../../api/api"
+import EditEmployee from './EditEmployee'
+import DeleteEmployee from './DeleteEmployee'
 
-function EmployeeDetails() {
+function EmployeeDetails({ userForm, setUserForm }) {
     const [employee, setEmployee] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const { id } = useParams()
-    const navigate = useNavigate()
+
+    const formatDate = (field) => {
+        const newDate = new Date(field)
+        const dd = newDate.getDate() + 1
+        const mm = newDate.getMonth() + 1
+        const yyyy = newDate.getFullYear()
+
+        return `${dd}/${mm}/${yyyy}`
+    }
 
     useEffect(() => {
         try {
@@ -26,67 +34,105 @@ function EmployeeDetails() {
     }, [id])
 
     return (
-        <Container style={{ height: '90vh' }} className="d-flex justify-content-center align-items-center">
-            {
-                isLoading && <Spinner animation="border" />}
-            {
-                !isLoading &&
-                <Card className="text-center w-100">
-                    <Card.Header>
-                        <Card.Title className="m-0">
-                            <h3>{employee.name}</h3>
-                        </Card.Title>
-                        {
-                            employee.active && <h6 className="text-success">Este funcionário está ativo na empresa</h6>
-                        }
-                        {
-                            !employee.active && <h6 className="text-secondary">Este funcionário não está ativo na empresa</h6>
-                        }
-                    </Card.Header>
-                    <Card.Body>
-                        <Card.Title>Informações trabalhista</Card.Title>
-                        <Row>
-                            <Col>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faCalendarCheck} /> {employee.admissionDate}
-                                </Card.Text>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faCircleCheck} /> {employee.status}
-                                </Card.Text>
-                            </Col>
-                            <Col>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faMoneyCheckDollar} /> R${employee.salary},00
-                                </Card.Text>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faBuildingUser} /> {employee.department}
-                                </Card.Text>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Card.Title>Informações de contato</Card.Title>
-                            <Col>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faAt} /> {employee.email}
-                                </Card.Text>
-                            </Col>
-                            <Col>
-                                <Card.Text>
-                                    <FontAwesomeIcon icon={faPhone} /> {employee.phone}
-                                </Card.Text>
-                            </Col>
-                        </Row>
-                        <Row className="mt-3">
-                            <Col>
-                                <Button
-                                    variant="secondary"
-                                    onClick={() => navigate(-1)}
-                                >
-                                    Voltar</Button>
-                            </Col>
-                        </Row>
-                    </Card.Body>
-                </Card>
+        <Container>
+            {isLoading && <Spinner animation="border" />}
+            {!isLoading &&
+                <>
+                    <img className="rounded-circle my-4" src={employee.profileImg} alt="" />
+                    <h1>{employee.name}</h1>
+                    {
+                        employee.active && <h6 className="text-success">Este funcionário está ativo na empresa</h6>
+                    }
+                    {
+                        !employee.active && <h6 className="text-secondary">Este funcionário não está ativo na empresa</h6>
+                    }
+                    <Row className="my-3">
+                        <Col>
+                            <EditEmployee id={ id } userForm={userForm} setUserForm={setUserForm} />
+                        </Col>
+                        <Col>
+                            <DeleteEmployee id={id} />
+                        </Col>
+                    </Row>
+                    <Card>
+                        <Card.Header>
+                            <h5 className="fw-bold m-0 py-1">Dados básicos</h5>
+                        </Card.Header>
+                        <Card.Body>
+                            <Row>
+                                <Col>
+                                    <Card.Title>Endereço de e-mail</Card.Title>
+                                    <Card.Text>
+                                        {employee.email}
+                                    </Card.Text>
+                                </Col>
+                                <Col>
+                                    <Card.Title>Número de telefone</Card.Title>
+                                    <Card.Text>
+                                        {employee.phone}
+                                    </Card.Text>
+                                </Col>
+                            </Row>
+                            <Row className="mt-3">
+                                <Col>
+                                    <Card.Title>Data de aniversário</Card.Title>
+                                    <Card.Text>
+                                        {formatDate(employee.birthDate)}
+                                    </Card.Text>
+                                </Col>
+                                <Col>
+                                    <Card.Title>Cidade de residência</Card.Title>
+                                    <Card.Text>
+                                        {employee.address.city} - {employee.address.state}
+                                    </Card.Text>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                    <Card className="my-5">
+                        <Card.Header>
+                            <h5 className="fw-bold m-0 py-1">Dados empregatícios</h5>
+                        </Card.Header>
+                        <Card.Body>
+                            <Row>
+                                <Col>
+                                    <Card.Title>Data de admissão</Card.Title>
+                                    <Card.Text>
+                                        {formatDate(employee.admissionDate)}
+                                    </Card.Text>
+                                </Col>
+                                {!employee.active &&
+                                    <Col>
+                                        <Card.Title>Data de desligamento</Card.Title>
+                                        <Card.Text>
+                                            {formatDate(employee.resignationDate)}
+                                        </Card.Text>
+                                    </Col>
+                                }
+                                <Col>
+                                    <Card.Title>Salário</Card.Title>
+                                    <Card.Text>
+                                        R$ {employee.salary}
+                                    </Card.Text>
+                                </Col>
+                            </Row>
+                            <Row className="mt-3">
+                                <Col>
+                                    <Card.Title>Status</Card.Title>
+                                    <Card.Text>
+                                        {employee.status}
+                                    </Card.Text>
+                                </Col>
+                                <Col>
+                                    <Card.Title>Departamento</Card.Title>
+                                    <Card.Text>
+                                        {employee.department}
+                                    </Card.Text>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                </>
             }
         </Container>
     )

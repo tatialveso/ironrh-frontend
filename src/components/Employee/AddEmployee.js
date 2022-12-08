@@ -3,22 +3,22 @@ import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify'
 import { api } from "../../api/api"
 
-function AddEmployee({ form, setForm }) {
+function AddEmployee({ userForm, setUserForm }) {
     const navigate = useNavigate()
     
     const handleChange = (e) => {
         if (e.target.name === "active") {
-            setForm({ ...form, active: e.target.checked })
+            setUserForm({ ...userForm, active: e.target.checked })
             return
         }
 
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setUserForm({ ...userForm, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = async (e) => { 
         e.preventDefault()
         try {
-            await api.post("/employees/create", form)
+            await api.post("/user/create", userForm)
             navigate("/funcionarios")
 
             toast.success('Novo funcionário foi cadastrado!', {
@@ -59,7 +59,7 @@ function AddEmployee({ form, setForm }) {
                                 label="Funcionário ativo na empresa"
                                 name="active"
                                 onChange={handleChange}
-                                checked={form.active}
+                                checked={userForm.active}
                             />
                         </Form.Group>
                     </Col>
@@ -70,7 +70,7 @@ function AddEmployee({ form, setForm }) {
                                 type="text"
                                 placeholder="Insira o nome completo do funcionário"
                                 name="name"
-                                value={form.name}
+                                value={userForm.name}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -84,7 +84,7 @@ function AddEmployee({ form, setForm }) {
                                 type="text"
                                 placeholder="Insira o número de telefone para contato com DDD"
                                 name="phone"
-                                value={form.phone}
+                                value={userForm.phone}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -96,7 +96,7 @@ function AddEmployee({ form, setForm }) {
                                 type="email"
                                 placeholder="Insira o endereço de e-mail válido para contato"
                                 name="email"
-                                value={form.email}
+                                value={userForm.email}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -110,7 +110,7 @@ function AddEmployee({ form, setForm }) {
                                 type="number"
                                 placeholder="Insira o valor da remuneração mensal"
                                 name="salary"
-                                value={form.salary}
+                                value={userForm.salary}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -135,7 +135,7 @@ function AddEmployee({ form, setForm }) {
                             <Form.Control
                                 type="date"
                                 name="admissionDate"
-                                value={form.admissionDate}
+                                value={userForm.admissionDate}
                                 onChange={handleChange}
                             />
                         </Form.Group>

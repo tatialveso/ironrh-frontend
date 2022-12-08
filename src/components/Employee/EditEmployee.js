@@ -20,7 +20,7 @@ function EditEmployee({ id, userForm, setUserForm }) {
 
         fetchEmployee()
     }, [id, setUserForm])
-    
+
     const handleChange = (e) => {
         if (e.target.name === "active") {
             setUserForm({ ...userForm, active: e.target.checked })
@@ -116,12 +116,21 @@ function EditEmployee({ id, userForm, setUserForm }) {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
+                            <Form.Label>Data de aniversário</Form.Label>
+                            <Form.Control
+                                type="date"
+                                name="birthDate"
+                                value={userForm.birthDate}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Remuneração por mês</Form.Label>
                             <Form.Control
                                 type="number"
                                 placeholder="Insira o valor da remuneração mensal"
                                 name="salary"
-                                value={userForm.salary}
+                                value={userForm.salary + 1}
                                 onChange={handleChange}
                             />
                         </Form.Group>
