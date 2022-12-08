@@ -45,7 +45,7 @@ function App() {
           <Route path="/perfil" element={<ProtectedRoute Component={Profile} />} />
           <Route path="/funcionarios" element={<EmployeeList />} />
           <Route path="/funcionarios/adicionar" element={<AddEmployee userForm={userForm} setUserForm={setUserForm} />} />
-          <Route path="/funcionarios/:id" element={<EmployeeDetails />} />
+          <Route path="/funcionarios/:id" element={<EmployeeDetails userForm={userForm} setUserForm={setUserForm} />} />
           <Route path="/tarefas" element={<TodoList todoForm={todoForm} setTodoForm={setTodoForm} />} />
           <Route path="/tarefas/nova-tarefa" element={<AddTodo todoForm={todoForm} setTodoForm={setTodoForm} />} />
           <Route path="*" element={<ErrorPage />} />
