@@ -51,7 +51,7 @@ function Profile() {
                         <Col>
                             <Card.Title>Data de aniversário</Card.Title>
                             <Card.Text>
-                            {formatDate(loggedUser.user.birthDate)}
+                                {formatDate(loggedUser.user.birthDate)}
                             </Card.Text>
                         </Col>
                         <Col>
