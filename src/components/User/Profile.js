@@ -1,9 +1,15 @@
 import { useContext } from "react"
 import { Card, Col, Container, Row } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/authContext"
 
 function Profile() {
+    const navigate = useNavigate()
     const { loggedUser } = useContext(AuthContext)
+
+    if(!loggedUser) {
+       return navigate("/erro")
+    }
 
     const formatDate = (field) => {
         const newDate = new Date(field)
@@ -57,7 +63,7 @@ function Profile() {
                         <Col>
                             <Card.Title>Cidade de residência</Card.Title>
                             <Card.Text>
-                                {loggedUser.user.address.city} - {loggedUser.user.address.state}
+                                {loggedUser.user.address?.city} - {loggedUser.user.address?.state}
                             </Card.Text>
                         </Col>
                     </Row>
