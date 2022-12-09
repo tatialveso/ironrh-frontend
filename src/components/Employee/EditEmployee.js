@@ -129,7 +129,7 @@ function EditEmployee({ id, userForm, setUserForm }) {
                 type="number"
                 placeholder="Insira o valor da remuneração mensal"
                 name="salary"
-                value={userForm.salary + 1}
+                value={userForm.salary}
                 onChange={handleChange}
               />
             </Form.Group>

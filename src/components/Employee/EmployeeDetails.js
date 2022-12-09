@@ -115,7 +115,7 @@ function EmployeeDetails({ userForm, setUserForm }) {
                 )}
                 <Col>
                   <Card.Title>Salário</Card.Title>
-                  <Card.Text>R$ {employee.salary}</Card.Text>
+                  <Card.Text>R$ {employee.salary + 1}</Card.Text>
                 </Col>
               </Row>
               <Row className="mt-3">
