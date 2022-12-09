@@ -35,7 +35,7 @@ function EmployeeDetails({ userForm, setUserForm }) {
 
   return (
     <Container>
-      {isLoading && <Spinner animation="border" />}
+      {isLoading && <Spinner className="mt-4" animation="border" />}
       {!isLoading && (
         <>
           <img
