@@ -50,23 +50,25 @@ function EmployeeDetails({ userForm, setUserForm }) {
             </h6>
           )}
           {!employee.active && (
-            <h6 className="text-secondary">
+            <h6 className="text-secondary mb-3">
               Este funcionário não está ativo na empresa
             </h6>
           )}
-          <Row className="my-3">
-            <Col>
-              <EditEmployee
-                id={id}
-                userForm={userForm}
-                setUserForm={setUserForm}
-              />
-            </Col>
-            <Col>
-              <DeleteEmployee id={id} />
-            </Col>
-          </Row>
-          <Card>
+          {employee.isAdmin && (
+            <Row>
+              <Col>
+                <EditEmployee
+                  id={id}
+                  userForm={userForm}
+                  setUserForm={setUserForm}
+                />
+              </Col>
+              <Col>
+                <DeleteEmployee id={id} />
+              </Col>
+            </Row>
+          )}
+          <Card className="mt-3">
             <Card.Header>
               <h5 className="fw-bold m-0 py-1">Dados básicos</h5>
             </Card.Header>
