@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Card, Col, Container, Row, Spinner, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import EditEmployee from "./EditEmployee";
@@ -128,6 +128,35 @@ function EmployeeDetails({ userForm, setUserForm }) {
                   <Card.Text>{employee.department}</Card.Text>
                 </Col>
               </Row>
+            </Card.Body>
+          </Card>
+          <Card className="my-5">
+            <Card.Header>
+              <h5 className="fw-bold m-0 py-1">Descrição de tarefas</h5>
+            </Card.Header>
+            <Card.Body>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Prazo</th>
+                    <th>Progresso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {employee.todos.map((todo) => {
+                    return (
+                      <tr key={todo._id}>
+                        <td>{todo.title}</td>
+                        <td>{todo.description}</td>
+                        <td>{formatDate(todo.deadline)}</td>
+                        <td>{todo.progress}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
             </Card.Body>
           </Card>
         </>
