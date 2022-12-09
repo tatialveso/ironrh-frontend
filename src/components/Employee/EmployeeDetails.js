@@ -41,7 +41,7 @@ function EmployeeDetails({ userForm, setUserForm }) {
           <img
             className="rounded-circle my-4"
             src={employee.profileImg}
-            alt=""
+            alt={`Imagem de perfil de ${employee.name}`}
           />
           <h1>{employee.name}</h1>
           {employee.active && (
@@ -89,7 +89,7 @@ function EmployeeDetails({ userForm, setUserForm }) {
                 <Col>
                   <Card.Title>Cidade de residência</Card.Title>
                   <Card.Text>
-                    {employee.address.city} - {employee.address.state}
+                    {employee.address?.city} - {employee.address?.state}
                   </Card.Text>
                 </Col>
               </Row>
