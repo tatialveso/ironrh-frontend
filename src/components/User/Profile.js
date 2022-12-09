@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 
@@ -105,6 +105,35 @@ function Profile() {
               <Card.Text>{loggedUser.user.department}</Card.Text>
             </Col>
           </Row>
+        </Card.Body>
+      </Card>
+      <Card className="my-5">
+        <Card.Header>
+          <h5 className="fw-bold m-0 py-1">Tarefas</h5>
+        </Card.Header>
+        <Card.Body>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Prazo</th>
+                <th>Progresso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loggedUser.user.todos.map((todo) => {
+                return (
+                  <tr>
+                    <td>{todo.title}</td>
+                    <td>{todo.description}</td>
+                    <td>{formatDate(todo.deadline)}</td>
+                    <td>{todo.progress}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
         </Card.Body>
       </Card>
     </Container>
