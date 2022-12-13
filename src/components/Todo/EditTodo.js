@@ -93,6 +93,16 @@ function EditTodo({ id, todoForm, setTodoForm }) {
             </Form.Group>
 
             <Form.Group className="mb-3">
+              <Form.Label>Progresso</Form.Label>
+              <Form.Select name="progress" onChange={handleChange}>
+                <option>Selecione uma opção</option>
+                <option value="Não iniciado">Não iniciado</option>
+                <option value="Em Progresso">Em Progresso</option>
+                <option value="Concluído">Concluído</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
               <Form.Label>Prazo de conclusão</Form.Label>
               <Form.Control
                 type="date"
