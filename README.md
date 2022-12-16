@@ -28,3 +28,7 @@ npm start
 
 ## :dart: Status do projeto
 O projeto está em andamento.
+
+
+
+
